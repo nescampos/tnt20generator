@@ -68,7 +68,16 @@ const MintableTNT20ByteCode = {
       
     }
 
-
+    function returnUrlContract(chainId,hash){
+      var network = ThetaJS.networks.Privatenet.explorerUrl;
+      if(chainId == ThetaJS.networks.ChainIds.Mainnet){
+        network = ThetaJS.networks.Mainnet.explorerUrl;
+      }
+      if(chainId == ThetaJS.networks.ChainIds.Testnet){
+        network = ThetaJS.networks.Testnet.explorerUrl;
+      }
+      return network+"/txs/"+hash;
+    }
 
       async function deploynewtoken()
       {
@@ -96,7 +105,7 @@ const MintableTNT20ByteCode = {
               if(valueTransaction != null && valueTransaction !== undefined) {
                 $('#newToken').text(tokenSymbol)
                 $('#newContract').text(valueTransaction.receipt.ContractAddress)
-                $('#linkContract').attr('href', ThetaJS.networks.Privatenet.explorerUrl+"/txs/"+hash).text('You can view the transaction here')
+                $('#linkContract').attr('href',returnUrlContract(txResult.block.ChainID,hash).text('You can view the transaction here')
                 $('.newcontractcreated').show();
               }
             }
