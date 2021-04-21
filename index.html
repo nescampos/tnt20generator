@@ -105,7 +105,7 @@ const MintableTNT20ByteCode = {
               if(valueTransaction != null && valueTransaction !== undefined) {
                 $('#newToken').text(tokenSymbol)
                 $('#newContract').text(valueTransaction.receipt.ContractAddress)
-                $('#linkContract').attr('href',returnUrlContract(txResult.block.ChainID,hash).text('You can view the transaction here')
+                $('#linkContract').attr('href',returnUrlContract(txResult.block.ChainID,hash)).text('You can view the transaction here')
                 $('.newcontractcreated').show();
               }
             }
