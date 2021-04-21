@@ -2,7 +2,10 @@
 <html>
   <head>
     <title>TNT20 Token Generator</title>
-    <link rel='stylesheet' href='stylesheets/style.css' />
+    <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.0/examples/heroes/heroes.css" rel="stylesheet">
+    
+        <link rel="stylesheet" href="stylesheets/Site.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script type="application/javascript" src="https://unpkg.com/@thetalabs/theta-wallet-connect@0.0.15/dist/theta-wallet-connect.umd.js"></script>
     <script type="application/javascript" src="javascripts/thetajs.browser.js"></script>
@@ -109,41 +112,125 @@ const MintableTNT20ByteCode = {
       
     </script>
   </head>
-  <body>
-    <h1>TNT20 Token Generator</h1>
-    <p>Welcome to TNT20 Token Generator</p>
-
-    <input type="button" value="Connect Theta Wallet" id="button_wallet" onclick="connectWallet()" />
-
-    <select name="accountIds" id="accountIds" class="contractValues">
-
-    </select>
-
-    <input type="button" value="Check account" id="button_checkaccount"  class="contractValues" onclick="checkaccount()" />
-
-    <input type="text" name="tokenName" id="tokenName" class="contractValues" />
-    <input type="text" name="tokenSymbol" id="tokenSymbol" class="contractValues" />
-    <input type="text" name="tokenSupply" id="tokenSupply" class="contractValues" />
-    <input type="number" name="tokenDecimals" id="tokenDecimals" class="contractValues" />
-
-
-
-    <input type="button" value="Create Token" id="button_deploy"  class="contractValues" onclick="deploynewtoken()" />
-
-    <div class="accountUser">
-      Your account <span id="accountIdUser"></span> has <span id="thetaAmmount"> </span> THETA and <span id="tfuelAmmount">  </span> TFUEL in the <span id="networkAmmount"> </span>
+  <body class="container">
+    <div class="px-4 py-5 my-5 text-center">
+      <h1>TNT20 Token Generator</h1>
+      <p class="lead">Welcome. On this site, you can generate your own token (for now in privatenet) with your wallet in Chrome, without the need for technical knowledge.</p>
+      <p>If you don't have the Theta wallet extension installed in Chrome, <a href="https://chrome.google.com/webstore/detail/theta-wallet/ckelpdlfgochnkdgikcgbimdcfgpkhgk/related?hl=en&authuser=0" class="btn btn-primary btn-lg" target="_blank"> click here.</a></p>
     </div>
+    <div class="b-example-divider"></div>
+    <br />
+    <div class="row">
+      <div class="col-md-12 text-center">
+          <h2>Step 1</h2>
+          <p>Connect your wallet (if this is your first time, you must authorize this website to get access to your wallet)</p>
+          <p><input type="button" value="Connect Theta Wallet" id="button_wallet" class="btn btn-success" onclick="connectWallet()" /></p>
+      </div>
+    </div>
+    <div class="b-example-divider"></div>
+    <br />
+    <div class="row">
+      <div class="col-md-12 text-center">
+          <h2>Step 2</h2>
+          <p>Select your account</p>
+          <p>
+            <select name="accountIds" id="accountIds" class="contractValues">
 
-    <div class="newcontractcreated">
-      Your new token <span id="newToken"></span> is created in contract: <span id="newContract"></span> <br />
+            </select>
+        </p>
+      </div>
+    </div>
+    <div class="b-example-divider"></div>
+    <br />
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2>Step 3 (optional)</h2> <br>
+      </div>
+        <div class="col-md-6 text-center">
+          
+          <p>Check your account (you need TFUEL for creating your new token)</p>
+          <p>
+            <input type="button" value="Check account" id="button_checkaccount"  class="contractValues btn btn-success" onclick="checkaccount()" />
+        </p>
+        </div>
+        <div class="col-md-5 text-center">
+        
+          <div class="accountUser card bg-primary text-white text-center p-3">
+            <figure class="mb-0">
+              <blockquote class="blockquote">
+                <p>Your account <span id="accountIdUser"></span> has <span id="thetaAmmount"> </span> THETA and <span id="tfuelAmmount">  </span> TFUEL in the <span id="networkAmmount"> </span> </p>
+              </blockquote>
+            </figure>
+          </div>
+        </div>
       
-      <a id="linkContract"></a> <br />
-      Here are the instructions for adding the new token in your wallet: 
+      </div>
+      
     </div>
-    <div class="newcontractcreated_failed">
+    <div class="b-example-divider"></div>
+    <br />
+    <div class="row">
+      <div class="col-md-12 text-center">
+          <h2>Step 4</h2>
+          <p>Type the required data for your new token (name, symbol, number of tokens and number of decimal places).</p>
+          <p>
+            <form class="p-5 border rounded-3 bg-light  text-center">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="tokenName" name="tokenName" placeholder="My new token">
+                <label for="tokenName">Token name</label>
+                
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="tokenSymbol" name="tokenSymbol" placeholder="TNT20">
+                <label for="tokenSymbol">Token symbol</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="tokenSupply" name="tokenSupply" placeholder="10000000">
+                <label for="tokenSupply">Token supply</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="tokenDecimals" name="tokenDecimals" placeholder="18">
+                <label for="tokenDecimals">Token decimals</label>
+              </div>
+              <hr class="my-4">
+            </form>
+          </p>
+      </div>
     </div>
-
-    
-
+    <div class="b-example-divider"></div>
+    <br />
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2>Step 5</h2>
+        <p>Create your token</p>
+          <p>
+            <input type="button" value="Create Token" id="button_deploy"  class="contractValues btn btn-success" onclick="deploynewtoken()" /> <br />
+            <div class="newcontractcreated_failed text-danger">
+            </div>
+          </p>
+          <br />
+          <div class="newcontractcreated text-success">
+            Your new token <span id="newToken"></span> is created in contract: <span id="newContract"></span> <br />
+            <a id="linkContract" target="_blank" class="btn btn-info"></a> <br />
+          </div>
+      </div>
+    </div>
+    <div class="b-example-divider"></div>
+    <br />
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2>Step 6</h2>
+        <p>Here are the instructions for adding the new token in your wallet: </p>
+      </div>
+      <br />
+      <div class="col-md-6 text-center">
+        <p>Select add token in your wallet</p>
+        <img src="images/step1.png" class="img-fluid" alt="Step1">
+      </div>
+      <div class="col-md-6 text-center">
+        <p>Add the contract hash (in the step 5), the token symbol (in step 4 or 5) and the quantity of decimals (step 4)</p>
+        <img src="images/step2.png" class="img-fluid" alt="Step2">
+      </div>
+    </div>
   </body>
 </html>
